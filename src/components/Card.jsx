@@ -3,13 +3,13 @@ import { memo } from "react";
 import { useCover } from "../hooks/useCover";
 
 const Card = memo(({ game }) => {
-    const { title, category } = game;
+    const { id, title, category } = game;
     const { image, video } = useCover(title);
 
     return (
         <>
             <div className="group overflow-hidden relative bg-slate-800 hover:bg-slate-700 border border-slate-600 p-1 rounded-md">
-                <Link className="absolute z-10 inset-0" />
+                <Link to={`/game/${id}`} className="absolute z-10 inset-0" />
                 <div className="relative">
                     <img src={image} alt={`${title}'s image`} className="block group-hover:opacity-40 transition-opacity duration-700 w-full rounded-md" />
                     <div

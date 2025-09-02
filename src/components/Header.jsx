@@ -17,17 +17,17 @@ const Header = () => {
                         <ul className="flex justify-end items-center gap-4">
                             <li>
                                 <NavLink className="text-slate-300 hover:text-white">
-                                    <i class="fa-regular fa-heart text-2xl"></i>
+                                    <i className="fa-regular fa-heart text-2xl"></i>
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink className="text-slate-300 hover:text-white">
-                                    <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                                    <i className="fa-solid fa-cart-shopping text-2xl"></i>
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink className="text-slate-300 hover:text-white">
-                                    <i class="fa-regular fa-circle-user text-3xl"></i>
+                                    <i className="fa-regular fa-circle-user text-3xl"></i>
                                 </NavLink>
                             </li>
                         </ul>

@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import { useGames } from "../hooks/useGames";
-const API_URL = 'http://localhost:3001/games'
 
 export const GlobalContext = createContext();
 
@@ -10,12 +9,12 @@ export const GlobalProvider = ({ children }) => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [sortBy, setSortBy] = useState('');
 
-    const [games] = useGames();
+    const [allGames, getGame, game] = useGames();
 
     let filteredGames = null;
 
-    if (games) {
-        filteredGames = games.filter(g => {
+    if (allGames) {
+        filteredGames = allGames.filter(g => {
             const matchesSearch = g.title.toLowerCase().includes(search.trim().toLowerCase());
             const matchesCategory = selectedCategory === '' || g.category === selectedCategory;
             return matchesSearch && matchesCategory;
@@ -25,14 +24,20 @@ export const GlobalProvider = ({ children }) => {
             filteredGames.sort((a, b) => {
                 let comparison = 0;
 
-                if (sortBy === 'title-asc') {
-                    comparison = a.title.localeCompare(b.title);
-                } else if (sortBy === 'title-desc') {
-                    comparison = b.title.localeCompare(a.title);
-                } else if (sortBy === 'category-asc') {
-                    comparison = a.category.localeCompare(b.category);
-                } else if (sortBy === 'category-desc') {
-                    comparison = b.category.localeCompare(a.category);
+                switch (sortBy) {
+                    case 'title-asc':
+                        comparison = a.title.localeCompare(b.title);
+                        break;
+                    case 'title-desc':
+                        comparison = b.title.localeCompare(a.title);
+                        break;
+                    case 'category-asc':
+                        comparison = a.category.localeCompare(b.category);
+                        break;
+                    case 'category-desc':
+                        comparison = b.category.localeCompare(a.category);
+                    default:
+                        break;
                 }
 
                 return comparison;
@@ -40,10 +45,12 @@ export const GlobalProvider = ({ children }) => {
         }
     }
 
-    const uniqueCategories = games ? [...new Set(games.map(game => game.category))].sort() : [];
+    const uniqueCategories = allGames ? [...new Set(allGames.map(game => game.category))].sort() : [];
 
     const value = {
         filteredGames,
+        getGame,
+        game,
         search,
         setSearch,
         showFilters,

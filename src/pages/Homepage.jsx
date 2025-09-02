@@ -6,8 +6,6 @@ const Homepage = () => {
 
     const { filteredGames } = useGlobalContext();
 
-    console.log(filteredGames)
-
     if (!filteredGames) return <>Caricamento...</>
 
     return (

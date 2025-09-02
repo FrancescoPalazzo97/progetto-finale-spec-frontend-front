@@ -16,7 +16,7 @@ const SearchBar = () => {
                 />
             </div>
             <button className="bg-rose-500 hover:bg-rose-400 text-white cursor-pointer px-4 py-2 rounded-r-xl font-medium transition w-1/12">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i className="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
     )

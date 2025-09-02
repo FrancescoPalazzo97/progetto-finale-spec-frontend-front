@@ -18,7 +18,7 @@ const FiltersSection = () => {
                     className="absolute top-1 right-1 cursor-pointer"
                     onClick={() => setShowFilters(false)}
                 >
-                    <i class="fa-solid fa-xmark text-red-500"></i>
+                    <i className="fa-solid fa-xmark text-red-500"></i>
                 </button>
                 <div className="flex flex-col sm:flex-row gap-4">
                     <div className="flex-1">
