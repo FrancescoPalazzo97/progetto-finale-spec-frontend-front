@@ -1,19 +1,15 @@
-import { NavLink } from "react-router-dom"
-import Logo from "./Logo"
-import SearchBar from "./SearchBar"
+import { NavLink } from "react-router-dom";
+import Logo from "./Logo";
 
 const Header = () => {
     return (
         <header className='bg-slate-800 text-slate-100 fixed top-0 inset-x-0 z-30'>
             <nav className='p-6'>
                 <ul className="flex justify-between items-center">
-                    <li className="w-1/3">
+                    <li className="w-1/2">
                         <Logo />
                     </li>
-                    <li className="w-1/3">
-                        <SearchBar />
-                    </li>
-                    <li className="w-1/3">
+                    <li className="w-1/2">
                         <ul className="flex justify-end items-center gap-4">
                             <li>
                                 <NavLink className="text-slate-300 hover:text-white">
