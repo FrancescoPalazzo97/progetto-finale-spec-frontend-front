@@ -11,9 +11,30 @@ export const GlobalProvider = ({ children }) => {
     const [sortBy, setSortBy] = useState('');
 
     const [compareList, setCompareList] = useLocalStorage("compareList", []);
-    const [favorites, setFavorites] = useLocalStorage("favorites", []);
+    const [favoritesIds, setFavoritesIds] = useLocalStorage("favorites", []);
 
     const [allGames, getGame, getSomeGames, game] = useGames();
+
+    const isInFavorites = (gameId) => favoritesIds.some(gId => gId === gameId);
+
+    const addFavorites = (gameId) => {
+        if (!isInFavorites(gameId)) {
+            setFavoritesIds([...favoritesIds, gameId]);
+        } else {
+            alert("Gioco già presente nei preferiti");
+        }
+    };
+
+    const removeFromFavorites = (gameId) => {
+        setFavoritesIds(favoritesIds.filter(gId => gId !== gameId));
+    };
+
+    const favoritesData = {
+        favoritesIds,
+        isInFavorites,
+        addFavorites,
+        removeFromFavorites
+    }
 
     const isInCompareList = (gameId) => compareList.some(gId => gId === gameId);
 
@@ -74,6 +95,7 @@ export const GlobalProvider = ({ children }) => {
 
     const value = {
         compareListData,
+        favoritesData,
         filteredGames,
         getGame,
         getSomeGames,

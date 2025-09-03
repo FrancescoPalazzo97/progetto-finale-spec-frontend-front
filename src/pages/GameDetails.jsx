@@ -7,30 +7,44 @@ import GameSpecifications from "../components/GameSpecifications";
 
 const GameDetails = () => {
     const { id } = useParams();
-    const { getGame, compareListData } = useGlobalContext();
+    const { getGame, compareListData, favoritesData } = useGlobalContext();
     const [game, setGame] = useState(null);
 
     useEffect(() => {
+        document.body.style.overflow = 'hidden';
         getGame(id)
             .then(data => setGame(data))
             .catch(e => console.error(e))
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
     }, []);
 
-    const handleClickCompareList = () => {
+    const handleAddToCompareList = () => {
         if (game) {
-            if (compareListData.isInCompareList(game.id)) {
-                console.log(game.id)
-                compareListData.removeCompareList(game.id);
-            } else {
+            if (!compareListData.isInCompareList(game.id)) {
                 compareListData.addCompareList(game.id);
+            } else {
+                compareListData.removeCompareList(game.id);
             }
         }
-    }
+    };
 
-    if (!game) return <>Caricamento...</>
+    const handleAddToFavorites = () => {
+        if (game) {
+            if (!favoritesData.isInFavorites(game.id)) {
+                favoritesData.addFavorites(game.id);
+            } else {
+                favoritesData.removeFromFavorites(game.id);
+            }
+        }
+    };
+
+    if (!game) return <>Caricamento...</>;
 
     return (
-        <main>
+        <main className="overflow-hidden">
             <div
                 className="bg-cover bg-center h-[35vh] w-full"
                 style={{ backgroundImage: `url('${game.bgImageUrl}')` }}
@@ -53,13 +67,16 @@ const GameDetails = () => {
                         <span className="my-6 text-3xl">{game.price}&euro;</span>
                         <div className="flex gap-5">
                             <button
-                                className="bg-slate-700 group hover:bg-slate-600 text-slate-300 hover:text-slate-100 px-5 py-3 transition-colors rounded-md border-2 border-slate-600"
-                                onClick={handleClickCompareList}
+                                className="bg-slate-700 group hover:bg-slate-600 text-slate-300 px-5 py-3 transition-colors rounded-md border-2 border-slate-600"
+                                onClick={handleAddToCompareList}
                             >
-                                <i className="fa-solid fa-code-compare group-hover:text-rose-500"></i>
+                                <i className={`fa-solid fa-code-compare ${compareListData.isInCompareList(game.id) ? 'text-rose-500' : ''}`}></i>
                             </button>
-                            <button className="bg-slate-700 group hover:bg-slate-600 text-slate-300 hover:text-slate-100 px-5 py-3 transition-colors rounded-md border-2 border-slate-600">
-                                <i className="fa-regular fa-heart group-hover:text-rose-500"></i>
+                            <button
+                                className="bg-slate-700 group hover:bg-slate-600 text-slate-300 hover:text-slate-100 px-5 py-3 transition-colors rounded-md border-2 border-slate-600"
+                                onClick={handleAddToFavorites}
+                            >
+                                <i className={`fa-regular fa-heart ${favoritesData.isInFavorites(game.id) ? 'text-rose-500' : ''}`}></i>
                             </button>
                             <button className="bg-rose-500 px-5 py-3 rounded-md hover:bg-rose-400 transition-colors font-semibold">
                                 <i className="fa-solid fa-cart-shopping mr-2"></i>

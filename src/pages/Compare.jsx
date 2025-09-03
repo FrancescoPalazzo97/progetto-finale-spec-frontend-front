@@ -12,6 +12,8 @@ const Compare = () => {
             getSomeGames(compareListData.compareList)
                 .then(data => setGames(data))
                 .catch(e => console.error(e));
+        } else {
+            setGames([]);
         }
     }, [compareListData.compareList]);
 

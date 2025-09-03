@@ -19,7 +19,7 @@ const CardCompare = ({ game }) => {
                 className="absolute top-1 right-1 p-2 hover:bg-slate-700 rounded-full transition-colors"
                 onClick={handleRemoveFromCompareList}
             >
-                <i class="fa-solid fa-xmark text-rose-500"></i>
+                <i className="fa-solid fa-minus text-rose-500"></i>
             </button>
             <h2 className="text-lg font-semibold mb-3 text-center">{game.title}</h2>
             <GameSpecifications game={game} />

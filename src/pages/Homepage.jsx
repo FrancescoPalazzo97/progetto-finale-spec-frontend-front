@@ -1,7 +1,6 @@
 import Card from "../components/Card"
-import FiltersSection from "../components/FiltersSection";
 import SearchContainer from "../components/SearchContainer";
-import { useGlobalContext } from "../hooks/useGlobalContext"
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const Homepage = () => {
 
