@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 const Logo = () => {
     return (
         <NavLink to='/'>
-            <h1 className="text-slate-300 hover:text-white uppercase text-4xl font-black">GamerLand</h1>
+            <h1 className="text-slate-300 hover:text-rose-500 transition-colors uppercase text-4xl font-black">GamerLand</h1>
         </NavLink>
     )
 }
