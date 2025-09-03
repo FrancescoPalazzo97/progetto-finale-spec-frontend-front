@@ -16,9 +16,11 @@ const Compare = () => {
     }, [compareListData.compareList]);
 
     return (
-        <div>
+        <div className="flex flex-wrap">
             {games.map(game => (
-                <CardCompare key={game.id} game={game} />
+                <div key={game.id} className="w-1/5 p-4">
+                    <CardCompare game={game} />
+                </div>
             ))}
         </div>
     )
