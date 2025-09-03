@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { useGames } from "../hooks/useGames";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const GlobalContext = createContext();
 
@@ -9,7 +10,31 @@ export const GlobalProvider = ({ children }) => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [sortBy, setSortBy] = useState('');
 
-    const [allGames, getGame, game] = useGames();
+    const [compareList, setCompareList] = useLocalStorage("compareList", []);
+    const [favorites, setFavorites] = useLocalStorage("favorites", []);
+
+    const [allGames, getGame, getSomeGames, game] = useGames();
+
+    const isInCompareList = (gameId) => compareList.some(gId => gId === gameId);
+
+    const addCompareList = (gameId) => {
+        if (!isInCompareList(gameId)) {
+            setCompareList([...compareList, gameId]);
+        } else {
+            alert("Gioco già presente nella lista di confronto");
+        }
+    }
+
+    const removeCompareList = (gameId) => {
+        setCompareList(compareList.filter(gId => gId !== gameId));
+    }
+
+    const compareListData = {
+        compareList,
+        isInCompareList,
+        addCompareList,
+        removeCompareList
+    }
 
     let filteredGames = null;
 
@@ -48,8 +73,10 @@ export const GlobalProvider = ({ children }) => {
     const uniqueCategories = allGames ? [...new Set(allGames.map(game => game.category))].sort() : [];
 
     const value = {
+        compareListData,
         filteredGames,
         getGame,
+        getSomeGames,
         game,
         search,
         setSearch,

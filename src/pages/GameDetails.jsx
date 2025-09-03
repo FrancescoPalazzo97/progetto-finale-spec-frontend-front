@@ -6,7 +6,7 @@ import VoteComponent from "../components/VoteComponent";
 
 const GameDetails = () => {
     const { id } = useParams();
-    const { getGame } = useGlobalContext();
+    const { getGame, compareListData } = useGlobalContext();
     const [game, setGame] = useState(null);
 
     useEffect(() => {
@@ -15,8 +15,19 @@ const GameDetails = () => {
             .catch(e => console.error(e))
     }, []);
 
+    const handleClickCompareList = () => {
+        if (game) {
+            if (compareListData.isInCompareList(game.id)) {
+                console.log(game.id)
+                compareListData.removeCompareList(game.id);
+            } else {
+                compareListData.addCompareList(game.id);
+            }
+        }
+    }
+
     if (!game) return <>Caricamento...</>
-    console.log(game.bgImageUrl)
+
     return (
         <main>
             <div
@@ -40,6 +51,12 @@ const GameDetails = () => {
                         </div>
                         <span className="my-6 text-3xl">{game.price}&euro;</span>
                         <div className="flex gap-5">
+                            <button
+                                className="bg-slate-700 group hover:bg-slate-600 text-slate-300 hover:text-slate-100 px-5 py-3 transition-colors rounded-md border-2 border-slate-600"
+                                onClick={handleClickCompareList}
+                            >
+                                <i className="fa-solid fa-code-compare group-hover:text-rose-500"></i>
+                            </button>
                             <button className="bg-slate-700 group hover:bg-slate-600 text-slate-300 hover:text-slate-100 px-5 py-3 transition-colors rounded-md border-2 border-slate-600">
                                 <i className="fa-regular fa-heart group-hover:text-rose-500"></i>
                             </button>

@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
-import CompareIcon from "./CompareIcon";
 
 const Header = () => {
     return (
@@ -13,22 +12,22 @@ const Header = () => {
                     <li>
                         <ul className="flex justify-end items-center gap-4">
                             <li>
-                                <NavLink className="text-slate-300 hover:text-rose-500 transition-colors" title="Confronta">
+                                <NavLink to='/compare' className="text-slate-300 hover:text-rose-500 transition-colors" title="Confronta">
                                     <i className="fa-solid fa-code-compare text-2xl"></i>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink className="text-slate-300 hover:text-rose-500 transition-colors" title="Aggiungi ai preferiti">
+                                <NavLink to='/favorites' className="text-slate-300 hover:text-rose-500 transition-colors" title="Aggiungi ai preferiti">
                                     <i className="fa-regular fa-heart text-2xl"></i>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink className="text-slate-300 hover:text-rose-500 transition-colors" title="Aggiungi al carrello">
+                                <NavLink to='/cart' className="text-slate-300 hover:text-rose-500 transition-colors" title="Aggiungi al carrello">
                                     <i className="fa-solid fa-cart-shopping text-2xl"></i>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink className="text-slate-300 hover:text-rose-500 transition-colors" title="Profilo">
+                                <NavLink to='/profile' className="text-slate-300 hover:text-rose-500 transition-colors" title="Profilo">
                                     <i className="fa-regular fa-circle-user text-3xl"></i>
                                 </NavLink>
                             </li>
