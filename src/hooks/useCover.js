@@ -73,6 +73,4 @@ const coversGames = {
     }
 }
 
-export const useCover = title => {
-    return coversGames[title];
-}
+export const useCover = title => coversGames[title];
