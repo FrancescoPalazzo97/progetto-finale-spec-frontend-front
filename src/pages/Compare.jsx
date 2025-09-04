@@ -18,13 +18,21 @@ const Compare = () => {
     }, [compareListData.compareList]);
 
     return (
-        <div className="flex flex-wrap">
-            {games.map(game => (
-                <div key={game.id} className="w-1/5 p-4">
-                    <CardCompare game={game} />
-                </div>
-            ))}
-        </div>
+        <main>
+            {games.length === 0
+                ? (<h1 className="text-4xl font-bold text-slate-100 mt-10 text-center">La tua lista di confronto è vuota</h1>)
+                : (
+                    <div className="w-[1400px] mx-auto relative">
+                        <h1 className="text-4xl font-bold text-slate-100 mt-10 text-center">La tua lista di confronto</h1>
+                        <div className="grid grid-cols-5 gap-4 py-30 px-2">
+                            {games.map(game => (
+                                <CardCompare key={game.id} game={game} />
+                            ))}
+                        </div>
+                    </div>
+                )
+            }
+        </main>
     )
 }
 

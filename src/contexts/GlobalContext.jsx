@@ -13,7 +13,7 @@ export const GlobalProvider = ({ children }) => {
     const [compareList, setCompareList] = useLocalStorage("compareList", []);
     const [favoritesIds, setFavoritesIds] = useLocalStorage("favorites", []);
 
-    const [allGames, getGame, getSomeGames, game] = useGames();
+    const [allGames, getGame, getSomeGames] = useGames();
 
     const isInFavorites = (gameId) => favoritesIds.some(gId => gId === gameId);
 
@@ -99,11 +99,8 @@ export const GlobalProvider = ({ children }) => {
         filteredGames,
         getGame,
         getSomeGames,
-        game,
         search,
         setSearch,
-        showFilters,
-        setShowFilters,
         selectedCategory,
         setSelectedCategory,
         sortBy,

@@ -1,6 +1,7 @@
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
+import { Container, ResponsiveGridContainer } from "../components/UI/containers";
 
 const Favorites = () => {
     const { favoritesData, getSomeGames } = useGlobalContext();
@@ -17,21 +18,20 @@ const Favorites = () => {
     }, [favoritesData.favoritesIds]);
 
     return (
-        <div>
+        <main>
             {favorites.length === 0 ? (
-                <p>Nessun gioco nei preferiti</p>
+                <h1 className="text-4xl font-bold text-slate-100 text-center mt-10">La tua lista di preferiti è vuota</h1>
             ) : (
-                <main>
-                    <div className="w-[1400px] mx-auto relative">
-                        <div className="grid grid-cols-3 gap-x-12 gap-y-10 py-30 px-2">
-                            {favorites.map(g => (
-                                <Card key={g.id} game={g} />
-                            ))}
-                        </div>
-                    </div>
-                </main>
+                <Container className="relative">
+                    <h1 className="text-4xl font-bold text-slate-100 text-center mt-10">La tua lista di preferiti</h1>
+                    <ResponsiveGridContainer className={"gap-x-12 gap-y-10 py-30 px-2 mt-10"}>
+                        {favorites.map(g => (
+                            <Card key={g.id} game={g} />
+                        ))}
+                    </ResponsiveGridContainer>
+                </Container>
             )}
-        </div>
+        </main>
     )
 }
 

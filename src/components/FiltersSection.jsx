@@ -2,8 +2,6 @@ import { useGlobalContext } from "../hooks/useGlobalContext"
 
 const FiltersSection = () => {
     const {
-        showFilters,
-        setShowFilters,
         selectedCategory,
         setSelectedCategory,
         sortBy,
@@ -12,7 +10,7 @@ const FiltersSection = () => {
     } = useGlobalContext();
 
     return (
-        <div className="flex flex-col sm:flex-row gap-4 group-hover:opacity-100 opacity-0 transition-opacity ease-in-out">
+        <div className="flex-col sm:flex-row gap-4 group-hover:flex hidden">
             <div className="flex-1">
                 <label htmlFor="category-filter" className="block text-slate-300 text-sm font-medium mb-2">
                     Filtra per categoria:

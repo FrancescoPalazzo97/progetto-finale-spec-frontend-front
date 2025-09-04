@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import PlatformAvailability from "../components/PlatformAvailability";
 import VoteComponent from "../components/VoteComponent";
 import GameSpecifications from "../components/GameSpecifications";
+import { MainProductDetails, Container } from "../components/UI/containers";
 
 const GameDetails = () => {
     const { id } = useParams();
@@ -44,12 +45,12 @@ const GameDetails = () => {
     if (!game) return <>Caricamento...</>;
 
     return (
-        <main className="overflow-hidden">
+        <MainProductDetails>
             <div
                 className="bg-cover bg-center h-[35vh] w-full"
                 style={{ backgroundImage: `url('${game.bgImageUrl}')` }}
             />
-            <div className="w-[1400px] mx-auto relative -top-32">
+            <Container className={"-mt-20 relative"}>
                 <div className="flex gap-4">
                     <div className="w-3/5 my-4">
                         <img
@@ -97,10 +98,8 @@ const GameDetails = () => {
                         <GameSpecifications game={game} />
                     </div>
                 </div>
-            </div>
-
-
-        </main >
+            </Container>
+        </MainProductDetails>
     )
 }
 

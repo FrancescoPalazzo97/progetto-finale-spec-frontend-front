@@ -1,6 +1,7 @@
 import Card from "../components/Card"
 import SearchContainer from "../components/SearchContainer";
 import { useGlobalContext } from "../hooks/useGlobalContext";
+import { Container, ResponsiveGridContainer } from "../components/UI/containers";
 
 const Homepage = () => {
 
@@ -10,14 +11,18 @@ const Homepage = () => {
 
     return (
         <main>
-            <div className="w-[1400px] mx-auto relative">
+            <Container className="relative">
                 <SearchContainer />
-                <div className="grid grid-cols-3 gap-x-12 gap-y-10 py-30 px-2">
-                    {filteredGames.map(g => (
-                        <Card key={g.id} game={g} />
-                    ))}
-                </div>
-            </div>
+                {filteredGames.length === 0
+                    ? (<h2 className="text-4xl font-bold text-slate-100 text-center py-56">Nessun gioco trovato</h2>)
+                    : (
+                        <ResponsiveGridContainer className={"gap-x-12 gap-y-10 py-30 px-2"}>
+                            {filteredGames.map(g => (
+                                <Card key={g.id} game={g} />
+                            ))}
+                        </ResponsiveGridContainer>
+                    )}
+            </Container>
         </main>
     )
 }
