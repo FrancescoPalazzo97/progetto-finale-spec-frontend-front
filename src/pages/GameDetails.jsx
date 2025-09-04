@@ -56,7 +56,7 @@ const GameDetails = () => {
                         <img
                             src={game.imageUrl}
                             alt={`${game.title}'s cover image`}
-                            className="w-full"
+                            className="w-full rounded-md"
                         />
                     </div>
                     <div className="w-2/5 bg-slate-800 border border-slate-600 rounded-md py-8 px-4 my-4 flex flex-col items-center justify-between text-slate-300">
