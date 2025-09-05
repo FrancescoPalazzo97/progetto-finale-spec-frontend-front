@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react"
-import { data } from "react-router-dom";
-const API_URL = 'http://localhost:3001/games'
+import { useState, useEffect } from "react";
+const API_URL = 'http://localhost:3001/games';
 
 export const useGames = () => {
     const [allGames, setAllGames] = useState(null);
+    const [categories, setCategories] = useState(null);
 
-    async function getAllGames() {
+    async function getAllGames(search = '', category = '') {
         try {
-            const res = await fetch(API_URL);
+            const res = await fetch(`${API_URL}?search=${search}&category=${category}`);
             if (!res.ok) throw new Error("Errore durante il recupero della lista dei giochi");
             const data = await res.json();
             setAllGames(data);
@@ -16,9 +16,21 @@ export const useGames = () => {
         }
     };
 
+    async function getCategories() {
+        try {
+            const res = await fetch(API_URL);
+            if (!res.ok) throw new Error("Errore durante il recupero delle categorie");
+            const data = await res.json();
+            const categoriesData = [...new Set(data.map(game => game.category))].sort();
+            setCategories(categoriesData);
+        } catch (e) {
+            console.error(`Errore: `, e)
+        }
+    }
+
     useEffect(() => {
-        getAllGames();
-    }, []);
+        getCategories();
+    }, [])
 
     async function getGame(id) {
         try {
@@ -53,5 +65,5 @@ export const useGames = () => {
         if (rejectedResponses > 0) throw new Error(`Errore nell'eliminazione delle task con id: ${rejectedResponses.join(", ")}`);
     }
 
-    return [allGames, getGame, getSomeGames]
+    return [allGames, categories, getAllGames, getGame, getSomeGames]
 }

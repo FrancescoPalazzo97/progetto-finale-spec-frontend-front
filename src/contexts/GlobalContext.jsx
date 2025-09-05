@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useMemo, useState, useEffect, use } from "react";
 import { useGames } from "../hooks/useGames";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -12,7 +12,11 @@ export const GlobalProvider = ({ children }) => {
     const [compareList, setCompareList] = useLocalStorage("compareList", []);
     const [favoritesIds, setFavoritesIds] = useLocalStorage("favorites", []);
 
-    const [allGames, getGame, getSomeGames] = useGames();
+    const [allGames, categories, getAllGames, getGame, getSomeGames] = useGames();
+
+    useEffect(() => {
+        getAllGames(search, selectedCategory);
+    }, [search, selectedCategory]);
 
     const isInFavorites = (gameId) => favoritesIds.some(gId => gId === gameId);
 
@@ -59,12 +63,7 @@ export const GlobalProvider = ({ children }) => {
     const filteredGames = useMemo(() => {
         if (!allGames) return null;
 
-        return allGames
-            .filter(g => {
-                const matchesSearch = g.title.toLowerCase().includes(search.trim().toLowerCase());
-                const matchesCategory = selectedCategory === '' || g.category === selectedCategory;
-                return matchesSearch && matchesCategory;
-            })
+        return [...allGames]
             .sort((a, b) => {
                 let comparison = 0;
 
@@ -80,15 +79,14 @@ export const GlobalProvider = ({ children }) => {
                         break;
                     case 'category-desc':
                         comparison = b.category.localeCompare(a.category);
+                        break;
                     default:
                         break;
                 }
 
                 return comparison;
             })
-    }, [allGames, search, selectedCategory, sortBy]);
-
-    const uniqueCategories = allGames ? [...new Set(allGames.map(game => game.category))].sort() : [];
+    }, [allGames, sortBy]);
 
     const value = {
         compareListData,
@@ -102,7 +100,7 @@ export const GlobalProvider = ({ children }) => {
         setSelectedCategory,
         sortBy,
         setSortBy,
-        uniqueCategories
+        categories
     }
 
     return (

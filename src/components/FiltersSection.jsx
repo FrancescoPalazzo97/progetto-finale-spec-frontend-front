@@ -6,7 +6,7 @@ const FiltersSection = () => {
         setSelectedCategory,
         sortBy,
         setSortBy,
-        uniqueCategories
+        categories
     } = useGlobalContext();
 
     return (
@@ -22,7 +22,7 @@ const FiltersSection = () => {
                     className="w-full px-4 py-2 rounded-md bg-slate-700 border border-slate-600 text-slate-100 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent"
                 >
                     <option value="">Tutte le categorie</option>
-                    {uniqueCategories.map(category => (
+                    {categories && categories.map(category => (
                         <option key={category} value={category}>
                             {category}
                         </option>
