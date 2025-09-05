@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import PlatformAvailability from "../components/PlatformAvailability";
 import VoteComponent from "../components/VoteComponent";
 import GameSpecifications from "../components/GameSpecifications";
-import { MainProductDetails, Container } from "../components/UI/containers";
+import { Container, ResponsiveFlexContainer } from "../components/UI/containers";
 
 const GameDetails = () => {
     const { id } = useParams();
@@ -12,14 +12,9 @@ const GameDetails = () => {
     const [game, setGame] = useState(null);
 
     useEffect(() => {
-        document.body.style.overflow = 'hidden';
         getGame(id)
             .then(data => setGame(data))
             .catch(e => console.error(e))
-
-        return () => {
-            document.body.style.overflow = 'auto';
-        };
     }, []);
 
     const handleAddToCompareList = () => {
@@ -45,21 +40,21 @@ const GameDetails = () => {
     if (!game) return <>Caricamento...</>;
 
     return (
-        <MainProductDetails>
+        <main>
             <div
                 className="bg-cover bg-center h-[35vh] w-full"
                 style={{ backgroundImage: `url('${game.bgImageUrl}')` }}
             />
             <Container className={"-mt-20 relative"}>
-                <div className="flex gap-4">
-                    <div className="w-3/5 my-4">
+                <ResponsiveFlexContainer className={"gap-4"}>
+                    <div className="w-full lg:w-3/5 mb-2">
                         <img
                             src={game.imageUrl}
                             alt={`${game.title}'s cover image`}
                             className="w-full rounded-md"
                         />
                     </div>
-                    <div className="w-2/5 bg-slate-800 border border-slate-600 rounded-md py-8 px-4 my-4 flex flex-col items-center justify-between text-slate-300">
+                    <div className="w-full lg:w-2/5 bg-slate-800 border border-slate-600 rounded-md py-8 px-4 mb-2 flex flex-col items-center justify-between text-slate-300">
                         <span className="font-semibold text-3xl mb-5">{game.title}</span>
                         <div className="flex flex-col">
                             <span className="mb-3">Disponibile sulle seguenti piattaforme:</span>
@@ -85,21 +80,23 @@ const GameDetails = () => {
                             </button>
                         </div>
                     </div>
-                </div>
-                <div className="flex gap-5">
-                    <div className="my-4 py-8 px-4 bg-slate-800 border border-slate-600 rounded-md text-slate-300 w-6/12">
+                </ResponsiveFlexContainer>
+                <div className='flex flex-col items-center px-20 lg:px-0 lg:items-stretch lg:flex-row gap-5'>
+                    <div className="w-full mt-4 mb-2 lg:mb-0 py-8 px-4 bg-slate-800 border border-slate-600 rounded-md text-slate-300 lg:w-6/12">
                         <h2 className="font-semibold text-2xl mb-4">Descrizione</h2>
                         <p>{game.description}</p>
                     </div>
-                    <div className="my-4 py-8 px-4 bg-slate-800 border border-slate-600 rounded-md text-slate-300 w-2/12">
-                        <VoteComponent score={game.metacriticScore} />
-                    </div>
-                    <div className="my-4 py-8 px-4 bg-slate-800 border border-slate-600 rounded-md text-slate-300 w-4/12">
-                        <GameSpecifications game={game} />
+                    <div className="flex gap-5 mb-10 lg:mb-0 w-full lg:w-6/12">
+                        <div className="w-2/5 lg:w-1/4 lg:mt-4 py-8 bg-slate-800 border border-slate-600 rounded-md text-slate-300">
+                            <VoteComponent score={game.metacriticScore} />
+                        </div>
+                        <div className="w-3/5 lg:w-3/4 lg:mt-4 py-8 px-4 bg-slate-800 border border-slate-600 rounded-md text-slate-300">
+                            <GameSpecifications game={game} />
+                        </div>
                     </div>
                 </div>
             </Container>
-        </MainProductDetails>
+        </main>
     )
 }
 

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import { useGames } from "../hooks/useGames";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -6,7 +6,6 @@ export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
     const [search, setSearch] = useState('')
-    const [showFilters, setShowFilters] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [sortBy, setSortBy] = useState('');
 
@@ -57,17 +56,16 @@ export const GlobalProvider = ({ children }) => {
         removeCompareList
     }
 
-    let filteredGames = null;
+    const filteredGames = useMemo(() => {
+        if (!allGames) return null;
 
-    if (allGames) {
-        filteredGames = allGames.filter(g => {
-            const matchesSearch = g.title.toLowerCase().includes(search.trim().toLowerCase());
-            const matchesCategory = selectedCategory === '' || g.category === selectedCategory;
-            return matchesSearch && matchesCategory;
-        });
-
-        if (sortBy) {
-            filteredGames.sort((a, b) => {
+        return allGames
+            .filter(g => {
+                const matchesSearch = g.title.toLowerCase().includes(search.trim().toLowerCase());
+                const matchesCategory = selectedCategory === '' || g.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            })
+            .sort((a, b) => {
                 let comparison = 0;
 
                 switch (sortBy) {
@@ -87,9 +85,8 @@ export const GlobalProvider = ({ children }) => {
                 }
 
                 return comparison;
-            });
-        }
-    }
+            })
+    }, [allGames, search, selectedCategory, sortBy]);
 
     const uniqueCategories = allGames ? [...new Set(allGames.map(game => game.category))].sort() : [];
 
