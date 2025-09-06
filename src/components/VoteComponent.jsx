@@ -1,5 +1,3 @@
-import React from 'react'
-
 const VoteComponent = ({ score }) => {
     const radius = 50;
     const strokeWidth = 8;
