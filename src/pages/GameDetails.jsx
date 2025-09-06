@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom"
-import { useGlobalContext } from '../hooks/useGlobalContext'
+import { useParams } from "react-router-dom";
+import { useGlobalContext } from '../hooks/useGlobalContext';
 import { useEffect, useState } from "react";
 import PlatformAvailability from "../components/PlatformAvailability";
 import VoteComponent from "../components/VoteComponent";
 import GameSpecifications from "../components/GameSpecifications";
 import { Container, FlexContainer } from "../components/UI/containers";
+import BackgroundImage from "../components/BackgroundImage";
 
 const GameDetails = () => {
     const { id } = useParams();
@@ -41,10 +42,7 @@ const GameDetails = () => {
 
     return (
         <main>
-            <div
-                className="bg-cover bg-center h-[35vh] w-full"
-                style={{ backgroundImage: `url('${game.bgImageUrl}')` }}
-            />
+            <BackgroundImage imageUrl={game.bgImageUrl} />
             <Container className={"-mt-20 relative"}>
                 <FlexContainer xl="xl:px-0" lg="lg:flex-row" className="gap-4 px-10">
                     <div className="w-full lg:w-3/5 mb-2">
