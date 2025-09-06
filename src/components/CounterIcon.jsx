@@ -1,5 +1,3 @@
-import React from 'react'
-
 const CounterIcon = ({ count }) => {
 
     if (count === 0) return null;

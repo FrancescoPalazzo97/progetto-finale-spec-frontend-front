@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom"
-import { useGlobalContext } from '../hooks/useGlobalContext'
+import { useParams } from "react-router-dom";
+import { useGlobalContext } from '../hooks/useGlobalContext';
 import { useEffect, useState } from "react";
 import PlatformAvailability from "../components/PlatformAvailability";
 import VoteComponent from "../components/VoteComponent";
 import GameSpecifications from "../components/GameSpecifications";
-import { Container, ResponsiveFlexContainer } from "../components/UI/containers";
+import { Container, FlexContainer } from "../components/UI/containers";
+import BackgroundImage from "../components/BackgroundImage";
 
 const GameDetails = () => {
     const { id } = useParams();
@@ -40,13 +41,10 @@ const GameDetails = () => {
     if (!game) return <>Caricamento...</>;
 
     return (
-        <main>
-            <div
-                className="bg-cover bg-center h-[35vh] w-full"
-                style={{ backgroundImage: `url('${game.bgImageUrl}')` }}
-            />
+        <>
+            <BackgroundImage imageUrl={game.bgImageUrl} />
             <Container className={"-mt-20 relative"}>
-                <ResponsiveFlexContainer className={"gap-4"}>
+                <FlexContainer xl="xl:px-0" lg="lg:flex-row" className="gap-4 px-10">
                     <div className="w-full lg:w-3/5 mb-2">
                         <img
                             src={game.imageUrl}
@@ -80,8 +78,8 @@ const GameDetails = () => {
                             </button>
                         </div>
                     </div>
-                </ResponsiveFlexContainer>
-                <div className='flex flex-col items-center px-20 lg:px-0 lg:items-stretch lg:flex-row gap-5'>
+                </FlexContainer>
+                <FlexContainer xl="xl:px-0" lg="lg:flex-row" className="gap-5 px-10">
                     <div className="w-full mt-4 mb-2 lg:mb-0 py-8 px-4 bg-slate-800 border border-slate-600 rounded-md text-slate-300 lg:w-6/12">
                         <h2 className="font-semibold text-2xl mb-4">Descrizione</h2>
                         <p>{game.description}</p>
@@ -94,9 +92,9 @@ const GameDetails = () => {
                             <GameSpecifications game={game} />
                         </div>
                     </div>
-                </div>
+                </FlexContainer>
             </Container>
-        </main>
+        </>
     )
 }
 

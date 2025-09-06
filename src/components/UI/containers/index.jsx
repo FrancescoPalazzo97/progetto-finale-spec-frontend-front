@@ -1,3 +1,3 @@
-export { default as Container } from './Container'
-export { default as ResponsiveGridContainer } from './ResponsiveGridContainer'
-export { default as ResponsiveFlexContainer } from './ResponsiveFlexContainer'
+export { default as Container } from './Container';
+export { default as GridContainer } from './GridContainer';
+export { default as FlexContainer } from './FlexContainer';

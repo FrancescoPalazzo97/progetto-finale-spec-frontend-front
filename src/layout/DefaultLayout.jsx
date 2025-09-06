@@ -5,9 +5,11 @@ const DefaultLayout = () => {
     return (
         <>
             <Header />
-            <div className="pt-[90px]">
-                <Outlet />
-            </div>
+            <main>
+                <div className="pt-[90px]">
+                    <Outlet />
+                </div>
+            </main>
         </>
     )
 }

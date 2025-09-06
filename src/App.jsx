@@ -1,6 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { GlobalProvider } from "./contexts/GlobalContext";
-import DefaultLayout from "./layout/DefaultLayout";
+import { DefaultLayout } from "./layout";
 import Homepage from "./pages/Homepage";
 import GameDetails from "./pages/GameDetails";
 import Compare from "./pages/Compare";
