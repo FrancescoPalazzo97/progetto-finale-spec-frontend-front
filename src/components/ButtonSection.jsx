@@ -1,7 +1,7 @@
-import { useGlobalContext } from "../hooks/useGlobalContext"
+import { useGamesContext } from "../hooks/useGamesContext";
 
 const ButtonSection = ({ game }) => {
-    const { compareListData, favoritesData } = useGlobalContext();
+    const { compareListData, favoritesData } = useGamesContext();
 
     const handleAddToCompareList = () => {
         if (game) {

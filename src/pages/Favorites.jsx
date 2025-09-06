@@ -1,10 +1,10 @@
-import { useGlobalContext } from "../hooks/useGlobalContext";
+import { useGamesContext } from "../hooks/useGamesContext";
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { Container, GridContainer } from "../components/UI/containers";
 
 const Favorites = () => {
-    const { favoritesData, getSomeGames } = useGlobalContext();
+    const { favoritesData, getSomeGames } = useGamesContext();
     const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const Favorites = () => {
     }, [favoritesData.favoritesIds]);
 
     return (
-        <main>
+        <>
             {favorites.length === 0 ? (
                 <h1 className="text-4xl font-bold text-slate-100 text-center mt-10">La tua lista di preferiti è vuota</h1>
             ) : (
@@ -34,7 +34,7 @@ const Favorites = () => {
                     </GridContainer>
                 </Container>
             )}
-        </main>
+        </>
     )
 }
 

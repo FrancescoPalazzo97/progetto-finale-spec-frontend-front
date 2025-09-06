@@ -1,10 +1,10 @@
 import CardCompare from "../components/CardCompare"
-import { useGlobalContext } from "../hooks/useGlobalContext";
+import { useGamesContext } from "../hooks/useGamesContext";
 import { useEffect, useState } from "react";
 import { Container, GridContainer } from "../components/UI/containers";
 
 const Compare = () => {
-    const { compareListData, getSomeGames } = useGlobalContext();
+    const { compareListData, getSomeGames } = useGamesContext();
     const [games, setGames] = useState([]);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Compare = () => {
     }, [compareListData.compareList]);
 
     return (
-        <main>
+        <>
             {games.length === 0
                 ? (<h1 className="text-4xl font-bold text-slate-100 mt-10 text-center">La tua lista di confronto è vuota</h1>)
                 : (
@@ -36,7 +36,7 @@ const Compare = () => {
                     </Container>
                 )
             }
-        </main>
+        </>
     )
 }
 
