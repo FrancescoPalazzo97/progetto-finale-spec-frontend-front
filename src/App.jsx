@@ -1,7 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { GlobalProvider } from "./contexts/GlobalContext";
-import { GamesProvider } from "./contexts/products/GamesContext";
-import { DefaultLayout, GamesLayout } from "./layout";
+import { DefaultLayout } from "./layout";
 import Homepage from "./pages/Homepage";
 import GameDetails from "./pages/GameDetails";
 import Compare from "./pages/Compare";
@@ -14,11 +13,7 @@ function App() {
     <GlobalProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={
-            <GamesProvider>
-              <GamesLayout />
-            </GamesProvider>
-          }>
+          <Route Component={DefaultLayout}>
             <Route index Component={Homepage} />
             <Route path="/game/:id" Component={GameDetails} />
             <Route path="/compare" Component={Compare} />

@@ -1,10 +1,10 @@
-import { useGamesContext } from "../hooks/useGamesContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { Container, GridContainer } from "../components/UI/containers";
 
 const Favorites = () => {
-    const { favoritesData, getSomeGames } = useGamesContext();
+    const { favoritesData, getSomeGames } = useGlobalContext();
     const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {

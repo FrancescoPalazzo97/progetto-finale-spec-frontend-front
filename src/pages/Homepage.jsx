@@ -1,11 +1,11 @@
 import Card from "../components/Card"
 import SearchContainer from "../components/SearchContainer";
-import { useGamesContext } from "../hooks/useGamesContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import { Container, GridContainer } from "../components/UI/containers";
 
 const Homepage = () => {
 
-    const { filteredGames } = useGamesContext();
+    const { filteredGames } = useGlobalContext();
 
     if (!filteredGames) return <>Caricamento...</>
 

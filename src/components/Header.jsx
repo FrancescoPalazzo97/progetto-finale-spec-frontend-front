@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
-import { useGamesContext } from "../hooks/useGamesContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import CounterIcon from "./CounterIcon";
 
 const Header = () => {
 
-    const { compareListData, favoritesData } = useGamesContext();
+    const { compareListData, favoritesData } = useGlobalContext();
 
     return (
         <header className='bg-slate-800 text-slate-100 fixed top-0 inset-x-0 z-30'>

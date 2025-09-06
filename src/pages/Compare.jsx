@@ -1,15 +1,14 @@
 import CardCompare from "../components/CardCompare"
-import { useGamesContext } from "../hooks/useGamesContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import { useEffect, useState } from "react";
 import { Container, GridContainer } from "../components/UI/containers";
 
 const Compare = () => {
-    const { compareListData, getSomeGames } = useGamesContext();
+    const { compareListData, getSomeGames } = useGlobalContext();
     const [games, setGames] = useState([]);
 
     useEffect(() => {
         if (compareListData.compareList.length > 0) {
-            console.log(compareListData.compareList);
             getSomeGames(compareListData.compareList)
                 .then(data => setGames(data))
                 .catch(e => console.error(e));
