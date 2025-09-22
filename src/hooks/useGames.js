@@ -62,7 +62,7 @@ export const useGames = () => {
 
         if (fulfilledResponses.length > 0) return fulfilledResponses;
 
-        if (rejectedResponses > 0) throw new Error(`Errore nell'eliminazione delle task con id: ${rejectedResponses.join(", ")}`);
+        if (rejectedResponses > 0) throw new Error(`Errore nel recupero dei giochi con id: ${rejectedResponses.join(", ")}`);
     }
 
     return [allGames, categories, getAllGames, getGame, getSomeGames]
